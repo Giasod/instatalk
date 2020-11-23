@@ -4,4 +4,8 @@ class User < ApplicationRecord
   def generate_nickname
     self.nickname = Faker::Name.first_name.downcase
   end
+
+  def online?
+    !Redis.new.get("№#{id}").nil?
+  end
 end
